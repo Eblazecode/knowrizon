@@ -1,15 +1,39 @@
+# models.py
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils import timezone
 
 
-class Admin(models.Model):
+class AdminManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self.create_user(email, password, **extra_fields)
+
+
+class Admin(AbstractBaseUser):
     admin_id = models.AutoField(primary_key=True)
     admin_fname = models.CharField(max_length=50)
     admin_lname = models.CharField(max_length=50)
-    admin_email = models.EmailField(max_length=50)
-    admin_password = models.CharField(max_length=50)
+    admin_email = models.EmailField(max_length=254, unique=True)
+    admin_password = models.CharField(max_length=128, default='default_password')  # Provide a one-off default
     admin_dept = models.CharField(max_length=50)
-    admin_created_at = models.DateTimeField(auto_now_add=True)
-    admin_updated_at = models.DateTimeField(auto_now=True)
+    admin_created_at = models.DateTimeField(default=timezone.now)
+    admin_updated_at = models.DateTimeField(default=timezone.now)
+
+    objects = AdminManager()
+
+    USERNAME_FIELD = 'admin_email'
+    REQUIRED_FIELDS = ['admin_fname', 'admin_lname', 'admin_dept']
 
     def __str__(self):
         return self.admin_fname
@@ -21,9 +45,8 @@ class Admin(models.Model):
 class students(models.Model):
     student_id = models.AutoField(primary_key=True)
     student_matric_no = models.CharField(max_length=50)
-    student_fname = models.CharField(max_length=50)
-    student_lname = models.CharField(max_length=50)
-    student_email = models.EmailField(max_length=50)
+    student_name = models.CharField(max_length=50)
+    student_email = models.EmailField(max_length=50, default='Not specified')  # Add default value
     student_password = models.CharField(max_length=50)
     student_gender = models.CharField(max_length=50)  # Corrected field name
     student_dept = models.CharField(max_length=50)
@@ -57,6 +80,7 @@ class academic_staff(models.Model):
     academic_staff_id = models.AutoField(primary_key=True)
     academic_staff_fname = models.CharField(max_length=50)
     academic_staff_lname = models.CharField(max_length=50)
+    academic_staff_gender = models.CharField(max_length=50, default='Not specified')  # Add default value
     academic_staff_email = models.EmailField(max_length=50)
     academic_staff_password = models.CharField(max_length=50)
     academic_staff_upload_approval = models.IntegerField(default=0)
@@ -64,15 +88,30 @@ class academic_staff(models.Model):
     academic_staff_position = models.CharField(max_length=50)
     academic_staff_phone = models.CharField(max_length=15, default='')
     academic_staff_prefix = models.CharField(max_length=10, default='')
-    academmic_staff_idenity = models.CharField(max_length=50, default='')  # Add this field
-    academic_staff_interest = models.CharField(max_length=50, default='')  # Add this field
-    research_interest = models.CharField(max_length=50)
+    academic_staff_identity = models.CharField(max_length=50, default='')
+    academic_staff_interest = models.CharField(max_length=50, default='interest')
     academic_staff_created_at = models.DateTimeField(auto_now_add=True)
     academic_staff_updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.academic_staff_fname
 
+
+class researchers(models.Model):
+    researcher_id = models.AutoField(primary_key=True)
+    researcher_fname = models.CharField(max_length=50)
+    researcher_lname = models.CharField(max_length=50)
+    researcher_prefix = models.CharField(max_length=50)
+    researcher_email = models.EmailField(max_length=50)
+    researcher_password = models.CharField(max_length=50)
+    researcher_dept = models.CharField(max_length=50)
+    researcher_phone = models.CharField(max_length=50)
+    researcher_interest = models.CharField(max_length=50)
+    researcher_created_at = models.DateTimeField(auto_now_add=True)
+    researcher_updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.researcher_fname
 
 
 # library materials models

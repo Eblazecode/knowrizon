@@ -17,4 +17,28 @@ urlpatterns = [
     path('add_academic_staff/', views.add_academic_staff, name='add_academic_staff'),
     path('add_content_manager/', views.add_content_manager, name='add_content_manager'),
     path('library_materials_category/', views.library_materials_category, name='library_materials_category'),
+    path('upload_students_records/', views.upload_students_records, name='upload_students_records'),
+    path('process_bulk_student_upload/', views.bulk_upload_students, name='process_bulk_student_upload'),
+    path('upload_staff_records/', views.upload_staff_records, name='upload_staff_records'),
+    path('process_bulk_staff_upload/', views.process_bulk_staff_upload, name='process_bulk_staff_upload'),
+    path('add_researcher/', views.add_researcher, name='add_researcher'),
+    path('login_decide/', views.login_decider,name='login_decider'),
+
+    path('admin_logout/', views.admin_logout, name='admin_logout'),
+
+    # MANAGING USERS
+    path('manage_students_users/', views.manage_students, name='manage_students_users'),
+    path('manage_staff_users/', views.manage_academic_staff, name='manage_staff_users'),
+
+    path('manage/staff/update/<int:academic_staff_id>/', views.admin_manage_staff_update, name='admin_manage_staff_update'),
+    path('manage/staff/delete/<int:academic_staff_id>/', views.admin_manage_staff_delete, name='admin_manage_staff_delete'),
+
+#USERS LOGIN
+    path('student_login/', views.student_login, name='student_login'),
+    path('staff_login/', views.staff_login, name='staff_login'),
+    path('researcher_login/', views.researcher_login, name='researcher_login'),
+    path('content_manager_login/', views.content_manager_login, name='content_manager_login'),
+
+    # USERS DASHBOARD
+    path('student_dashboard/', views.student_dashboard, name='student_dashboard'),
 ]

@@ -1,425 +1,62 @@
 <!DOCTYPE html>
- {% load static %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-   <title>{% block title %} ADMIN KNOWNRIZON {% endblock %}</title>
-     <!-- General CSS Files -->
-  <link rel="stylesheet" href="{% static 'assets/bundles/bootstrap-social/bootstrap-social.css' %}">
-<link rel="stylesheet" href="{% static 'assets/bundles/owlcarousel2/dist/assets/owl.carousel.min.css' %}">
-<link rel="stylesheet" href="{% static 'assets/bundles/owlcarousel2/dist/assets/owl.theme.default.min.css' %}">
-<link rel="stylesheet" href="{% static 'assets/bundles/summernote/summernote-bs4.css' %}">
-<link rel="stylesheet" href="{% static 'assets/bundles/prism/prism.css' %}">
-<link rel="stylesheet" href="{% static 'assets/css/app.min.css' %}">
-<!-- Template CSS -->
-<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-<link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
-<!-- Custom style CSS -->
-<link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
-<link rel='shortcut icon' type='image/x-icon' href="{% static 'assets/img/favicon.ico' %}" />
+    <title>{% block title %} VUNAWEB  {% endblock %}</title>
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/app.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/bundles/dropzonejs/dropzone.css' %}">
+ <link rel="stylesheet" href="{% static 'assets/bundles/datatables/datatables.min.css' %}">
+    <link rel="stylesheet"href="{% static 'assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/bundles/prism/prism.css' %}">
+    <link rel='shortcut icon' type='image/x-icon' href="{% static 'assets/img/logo.png' %}" />
 </head>
 <body>
-
-<div class="loader"></div>
-  <div id="app">
-    <div class="main-wrapper main-wrapper-1">
-      <div class="navbar-bg"></div>
-      <nav class="navbar navbar-expand-lg main-navbar sticky">
-        <div class="form-inline mr-auto">
-          <ul class="navbar-nav mr-3">
-            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
-									collapse-btn"> <i data-feather="align-justify"></i></a></li>
-            <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
-                <i data-feather="maximize"></i>
-              </a></li>
-            <li>
-              <form class="form-inline mr-auto">
-                <div class="search-element">
-                  <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="200">
-                  <button class="btn" type="submit">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-              </form>
-            </li>
-          </ul>
-        </div>
-        <ul class="navbar-nav navbar-right">
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-              class="nav-link nav-link-lg message-toggle"><i data-feather="mail"></i>
-              <span class="badge headerBadge1">
-                6 </span> </a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
-              <div class="dropdown-header">
-                Messages
-                <div class="float-right">
-                  <a href="#">Mark All As Read</a>
-                </div>
-              </div>
-              <div class="dropdown-list-content dropdown-list-message">
-                <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar
-											text-white"> <img alt="image" src="assets/img/users/user-1.png" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">John
-                      Deo</span>
-                    <span class="time messege-text">Please check your mail !!</span>
-                    <span class="time">2 Min Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="assets/img/users/user-2.png" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">Sarah
-                      Smith</span> <span class="time messege-text">Request for leave
-                      application</span>
-                    <span class="time">5 Min Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="assets/img/users/user-5.png" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">Jacob
-                      Ryan</span> <span class="time messege-text">Your payment invoice is
-                      generated.</span> <span class="time">12 Min Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="assets/img/users/user-4.png" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">Lina
-                      Smith</span> <span class="time messege-text">hii John, I have upload
-                      doc
-                      related to task.</span> <span class="time">30
-                      Min Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="assets/img/users/user-3.png" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">Jalpa
-                      Joshi</span> <span class="time messege-text">Please do as specify.
-                      Let me
-                      know if you have any query.</span> <span class="time">1
-                      Days Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="assets/img/users/user-2.png" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">Sarah
-                      Smith</span> <span class="time messege-text">Client Requirements</span>
-                    <span class="time">2 Days Ago</span>
-                  </span>
-                </a>
-              </div>
-              <div class="dropdown-footer text-center">
-                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-              </div>
+    <div class="loader"></div>
+    <div id="app">
+        <div class="main-wrapper main-wrapper-1">
+            <div class="navbar-bg"></div>
+            {% include 'includes/navigations/admin_navbar/admin_top_nav.html' %}
+            {% include 'includes/navigations/admin_navbar/admin_left_navbar.html' %}
+            <div class="main-content">
+                {% block content %}
+                {% endblock %}
             </div>
-          </li>
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-              class="nav-link notification-toggle nav-link-lg"><i data-feather="bell" class="bell"></i>
-            </a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
-              <div class="dropdown-header">
-                Notifications
-                <div class="float-right">
-                  <a href="#">Mark All As Read</a>
+            <footer class="main-footer">
+                <div class="footer-left">
+                    <a href="#">VUNAWEB </a>
                 </div>
-              </div>
-              <div class="dropdown-list-content dropdown-list-icons">
-                <a href="#" class="dropdown-item dropdown-item-unread"> <span
-                    class="dropdown-item-icon bg-primary text-white"> <i class="fas
-												fa-code"></i>
-                  </span> <span class="dropdown-item-desc"> Template update is
-                    available now! <span class="time">2 Min
-                      Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="far
-												fa-user"></i>
-                  </span> <span class="dropdown-item-desc"> <b>You</b> and <b>Dedik
-                      Sugiharto</b> are now friends <span class="time">10 Hours
-                      Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-success text-white"> <i
-                      class="fas
-												fa-check"></i>
-                  </span> <span class="dropdown-item-desc"> <b>Kusnaedi</b> has
-                    moved task <b>Fix bug header</b> to <b>Done</b> <span class="time">12
-                      Hours
-                      Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-danger text-white"> <i
-                      class="fas fa-exclamation-triangle"></i>
-                  </span> <span class="dropdown-item-desc"> Low disk space. Let's
-                    clean it! <span class="time">17 Hours Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="fas
-												fa-bell"></i>
-                  </span> <span class="dropdown-item-desc"> Welcome to Otika
-                    template! <span class="time">Yesterday</span>
-                  </span>
-                </a>
-              </div>
-              <div class="dropdown-footer text-center">
-                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown"><a href="#" data-toggle="dropdown"
-              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="assets/img/user.png"
-                class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
-            <div class="dropdown-menu dropdown-menu-right pullDown">
-              <div class="dropdown-title">Hello Sarah Smith</div>
-              <a href="profile.html" class="dropdown-item has-icon"> <i class="far
-										fa-user"></i> Profile
-              </a> <a href="timeline.html" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
-                Activities
-              </a> <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
-                Settings
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="auth-login.html" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
-                Logout
-              </a>
-            </div>
-          </li>
-        </ul>
-      </nav>
-      <div class="main-sidebar sidebar-style-2">
-        <aside id="sidebar-wrapper">
-          <div class="sidebar-brand">
-            <a href="admin_dashboard.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
-                class="logo-name">KNOWRIZON </span>
-            </a>
-          </div>
-          <ul class="sidebar-menu">
-            <li class="menu-header">Main</li>
-            <li class="dropdown active">
-              <a href="admin_dashboard.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="briefcase"></i><span>User management </span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="{% url 'add_users' %}">Add users(students, faculty, staff)</a></li>
-                        <li><a class="nav-link" href="{% url 'approve_requests' %}">Approve requests</a></li>
-                        <li><a class="nav-link" href="{% url 'manage_user_roles' %}">Manage user roles</a></li>
-                        <li><a class="nav-link" href="{% url 'handle_password_resets' %}">Handle password resets</a></li>
-                        <li><a class="nav-link" href="{% url 'monitor_user_activity' %}">Monitor User Activity</a></li>
-                        <li><a class="nav-link" href="{% url 'oversee_user_permissions' %}">Oversee User Permissions</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="command"></i><span>Content Management</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="{% url 'library_materials_category' %}">Add and Manage Digital Resources</a></li>
-                <li><a class="nav-link" href="portfolio.html">Review Content Submissions</a></li>
-                <li><a class="nav-link" href="blog.html">Create and Manage Content Categories</a></li>
-
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Subscription and Membership Mgt</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="email-inbox.html">Handle Subscription Plans</a></li>
-                <li><a class="nav-link" href="email-compose.html">Monitor Subscription Payments</a></li>
-                <li><a class="nav-link" href="email-read.html">Provide Customer Support</a></li>
-              </ul>
-            </li>
-            <li class="menu-header">SECONDARY </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>
-                 Library Maintenance </span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="alert.html">Database Maintenance:</a></li>
-                <li><a class="nav-link" href="badge.html">Monitor Content Usage </a></li>
-                <li><a class="nav-link" href="breadcrumb.html">System Updates and Upgrades:</a></li>
-
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="shopping-bag"></i><span>Reporting and Analytics</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="avatar.html">Generate Reports</a></li>
-                <li><a class="nav-link" href="card.html">Track Content Trends</a></li>
-                <li><a class="nav-link" href="modal.html">View System Health Metrics</a></li>
-                <li><a class="nav-link" href="sweet-alert.html">Sweet Alert</a></li>
-                <li><a class="nav-link" href="toastr.html">Toastr</a></li>
-                <li><a class="nav-link" href="empty-state.html">Empty State</a></li>
-                <li><a class="nav-link" href="multiple-upload.html">Multiple Upload</a></li>
-                <li><a class="nav-link" href="pricing.html">Pricing</a></li>
-                <li><a class="nav-link" href="tabs.html">Tab</a></li>
-              </ul>
-            </li>
-            <li><a class="nav-link" href="blank.html"><i data-feather="file"></i><span>Blank Page</span></a></li>
-            <li class="menu-header">Otika</li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="layout"></i><span>Compliance and Security</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="basic-form.html">Ensure Data Privacy and Security</a></li>
-                <li><a class="nav-link" href="forms-advanced-form.html">Audit and Log Monitoring </a></li>
-                <li><a class="nav-link" href="forms-editor.html">Monitor Content for Copyright Compliance</a></li>
-                <li><a class="nav-link" href="forms-validation.html">Validation</a></li>
-                <li><a class="nav-link" href="form-wizard.html">Form Wizard</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="grid"></i><span>Event and Notification Management</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="basic-table.html">Announce New Content and Features</a></li>
-                <li><a class="nav-link" href="advance-table.html">Organize Virtual Events</a></li>
-                <li><a class="nav-link" href="datatables.html">Datatable</a></li>
-                <li><a class="nav-link" href="export-table.html">Export Table</a></li>
-                <li><a class="nav-link" href="editable-table.html">Editable Table</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="pie-chart"></i><span>Content Recommendation System Management</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="chart-amchart.html">Analyze and Improve Search Functionality:</a></li>
-
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="feather"></i><span> Feedback and Improvements</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="icon-font-awesome.html">Font Awesome</a></li>
-                <li><a class="nav-link" href="icon-material.html">Material Design</a></li>
-                <li><a class="nav-link" href="icon-ionicons.html">Ion Icons</a></li>
-                <li><a class="nav-link" href="icon-feather.html">Feather Icons</a></li>
-                <li><a class="nav-link" href="icon-weather-icon.html">Weather Icon</a></li>
-              </ul>
-            </li>
-            <li class="menu-header">Media</li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="image"></i><span>Gallery</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="light-gallery.html">Light Gallery</a></li>
-                <li><a href="gallery1.html">Gallery 2</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="flag"></i><span>Sliders</span></a>
-              <ul class="dropdown-menu">
-                <li><a href="carousel.html">Bootstrap Carousel.html</a></li>
-                <li><a class="nav-link" href="owl-carousel.html">Owl Carousel</a></li>
-              </ul>
-            </li>
-            <li><a class="nav-link" href="timeline.html"><i data-feather="sliders"></i><span>Timeline</span></a></li>
-            <li class="menu-header">Maps</li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="map"></i><span>Google
-                  Maps</span></a>
-              <ul class="dropdown-menu">
-                <li><a href="gmaps-advanced-route.html">Advanced Route</a></li>
-                <li><a href="gmaps-draggable-marker.html">Draggable Marker</a></li>
-                <li><a href="gmaps-geocoding.html">Geocoding</a></li>
-                <li><a href="gmaps-geolocation.html">Geolocation</a></li>
-                <li><a href="gmaps-marker.html">Marker</a></li>
-                <li><a href="gmaps-multiple-marker.html">Multiple Marker</a></li>
-                <li><a href="gmaps-route.html">Route</a></li>
-                <li><a href="gmaps-simple.html">Simple</a></li>
-              </ul>
-            </li>
-            <li><a class="nav-link" href="vector-map.html"><i data-feather="map-pin"></i><span>Vector
-                  Map</span></a></li>
-            <li class="menu-header">Pages</li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="user-check"></i><span>Auth</span></a>
-              <ul class="dropdown-menu">
-                <li><a href="auth-login.html">Login</a></li>
-                <li><a href="admin_register.html">Register</a></li>
-                <li><a href="auth-forgot-password.html">Forgot Password</a></li>
-                <li><a href="auth-reset-password.html">Reset Password</a></li>
-                <li><a href="subscribe.html">Subscribe</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="alert-triangle"></i><span>Errors</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="errors-503.html">503</a></li>
-                <li><a class="nav-link" href="errors-403.html">403</a></li>
-                <li><a class="nav-link" href="errors-404.html">404</a></li>
-                <li><a class="nav-link" href="errors-500.html">500</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="anchor"></i><span>Other
-                  Pages</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="create-post.html">Create Post</a></li>
-                <li><a class="nav-link" href="posts.html">Posts</a></li>
-                <li><a class="nav-link" href="profile.html">Profile</a></li>
-                <li><a class="nav-link" href="contact.html">Contact</a></li>
-                <li><a class="nav-link" href="invoice.html">Invoice</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="chevrons-down"></i><span>Multilevel</span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Menu 1</a></li>
-                <li class="dropdown">
-                  <a href="#" class="has-dropdown">Menu 2</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Child Menu 1</a></li>
-                    <li class="dropdown">
-                      <a href="#" class="has-dropdown">Child Menu 2</a>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">Child Menu 1</a></li>
-                        <li><a href="#">Child Menu 2</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="#"> Child Menu 3</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </aside>
-      </div>
-
-      <div class="main-content">
-        {% block content %}
-          {% endblock %}
-                    </div>
-
-
-              <footer class="main-footer">
-        <div class="footer-left">
-          <a href="templateshub.net">KNOWRIZON</a></a>
+                <div class="footer-right"></div>
+            </footer>
         </div>
-        <div class="footer-right">
-        </div>
-      </footer>
     </div>
-  </div>
+    <!-- General JS Scripts -->
+    <script src="{% static 'assets/js/app.min.js' %}"></script>
+    <!-- JS Libraries -->
+    <script src="{% static 'assets/bundles/dropzonejs/min/dropzone.min.js' %}"></script>
+    <script src="{% static 'assets/bundles/apexcharts/apexcharts.min.js' %}"></script>
 
-  <!-- General JS Scripts -->
-
-<script src="{% static 'assets/js/app.min.js' %}"></script>
-<!-- JS Libraries -->
-<script src="{% static 'assets/bundles/apexcharts/apexcharts.min.js' %}"></script>
-<!-- Page Specific JS File -->
-<script src="{% static 'assets/js/page/index.js' %}"></script>
-<!-- Template JS File -->
-<script src="{% static 'assets/bundles/sweetalert/sweetalert.min.js' %}"></script>
-<!-- General JS Scripts -->
-<script src="{% static 'assets/js/app.min.js' %}"></script>
-<!-- JS Libraries -->
-<script src="{% static 'assets/js/scripts.js' %}"></script>
-<!-- Custom JS File -->
-<script src="{% static 'assets/js/custom.js' %}"></script>
-<script src="{% static 'assets/bundles/sweetalert/sweetalert.min.js' %}"></script>
-<!-- Page Specific JS File -->
-<script src="{% static 'assets/js/page/sweetalert.js' %}"></script>
-<!-- Template JS File -->
-<script src="{% static 'assets/js/scripts.js' %}"></script>
-<!-- Custom JS File -->
-<script src="{% static 'assets/js/custom.js' %}"></script>
-
-  <script src="{% static 'assets/bundles/owlcarousel2/dist/owl.carousel.min.js' %}"></script>
-<script src="{% static 'assets/bundles/summernote/summernote-bs4.js' %}"></script>
-<!-- Page Specific JS File -->
-<script src="{% static 'assets/js/page/widget-data.js' %}"></script>
-  <script src="{% static 'assets/js/page/portfolio.js' %}"></script>
-
-<script src="{% static 'assets/bundles/prism/prism.js' %}"></script>
-  <!-- Template JS File -->
+    <script src="{% static 'bundles/prism/prism.js' %}"></script>
+  <script src="{% static 'assets/bundles/datatables/datatables.min.js'%}"></script>
+    <script src="{% static 'assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js'%}"></script>
+    <script src="{% static 'assets/bundles/datatables/export-tables/dataTables.buttons.min.js'%}"></script>
+    <script src="{% static 'assets/bundles/datatables/export-tables/buttons.flash.min.js'%}"></script>
+    <script src="{% static 'assets/bundles/datatables/export-tables/jszip.min.js'%}"></script>
+    <script src="{% static 'assets/bundles/datatables/export-tables/pdfmake.min.js'%}"></script>
+    <script src="{% static 'assets/bundles/datatables/export-tables/vfs_fonts.js'%}"></script>
+    <script src="{% static 'assets/bundles/datatables/export-tables/buttons.print.min.js'%}"></script>
+    <script src="{% static 'assets/js/page/datatables.js'%}"></script>
+    <!-- Page Specific JS File -->
+    <script src="{% static 'assets/js/page/multiple-upload.js' %}"></script>
+    <script src="{% static 'assets/js/page/index.js' %}"></script>
+    <!-- Template JS File -->
+    <script src="{% static 'assets/js/scripts.js' %}"></script>
+    <script src="{% static 'assets/bundles/sweetalert/sweetalert.min.js' %}"></script>
+    <!-- Custom JS File -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
 </body>
-
 </html>

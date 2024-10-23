@@ -27,37 +27,16 @@
   <div class="loader"></div>
   <div id="app">
     <section class="section">
-      <div class="container mt-5">
+      <div class="container ">
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <div class="login-brand">
+          <div class="col-12 col-sm-12  col-md-8  col-lg-12 col-xl-12 ">
+               <div class="login-brand">
                 <img src="{% static 'assets/img/logo.png' %}" alt="logo" width="100" class="shadow-light rounded-circle">
                 </div>
 
-
-          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
             <div class="card card-primary">
 
-   <!--FEEBACK MODAL-->
-  {% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-dismissible col-6 mt-2 ml-2
-            {% if message.tags == 'error' %}
-                alert-danger
-            {% elif message.tags == 'success' %}
-                alert-success
-            {% elif message.tags == 'info' %}
-                alert-info
-            {% elif message.tags == 'warning' %}
-                alert-warning
-            {% endif %}" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
+
               <div class="card-header">
                 <h4>ADMIN ADD ACADEMIC STAFF  </h4>
 
@@ -154,24 +133,11 @@
         <input id="academic_staff_position" type="text" class="form-control" name="academic_staff_position">
     </div>
                      <div class="form-group">
-        <label for="academic_staff_interest">research interest </label>
+        <label for="academic_staff_interest">research interest/Bio </label>
         <input id="academic_staff_interest" type="text" class="form-control" name="academic_staff_interest">
     </div>
 
-    <div class="row">
-        <div class="form-group col-6">
-            <label for="academic_staff_password" class="d-block">Password</label>
-            <input id="academic_staff_password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="academic_staff_password">
-            <div id="pwindicator" class="pwindicator">
-                <div class="bar"></div>
-                <div class="label"></div>
-            </div>
-        </div>
-        <div class="form-group col-6">
-            <label for="password2" class="d-block">Password Confirmation</label>
-            <input id="password2" type="password" class="form-control" name="password-confirm">
-        </div>
-    </div>
+
     <div class="form-group">
         <div class="custom-control custom-checkbox">
             <input type="checkbox" name="agree" class="custom-control-input" id="agree">
@@ -184,7 +150,7 @@
 </form>
               </div>
               <div class="mb-4 text-muted text-center">
-                Already Registered? <a href="{% url 'admin_login' %}">Login</a>
+                ADD MULTIPLE STAFF ? <a href="{% url 'upload_students_records' %}">UPLOAD STAFF FILE </a>
               </div>
             </div>
           </div>
