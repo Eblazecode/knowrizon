@@ -1,0 +1,123 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block title %}books categories {% endblock %}
+
+{% block content %}
+
+<div class="section-header">
+    <h1>Books Categories</h1>
+</div>
+<section class="section">
+  <div class="section-body">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="bootstrap snippet">
+              <section id="portfolio" class="gray-bg padding-top-bottom">
+                <!--==== Portfolio Filters ====-->
+                <div class="categories">
+                  <ul>
+                    <li class="active">
+                      <a href="#" data-filter="*">All Faculties</a>
+                    </li>
+                    <li>
+                      <a href="#" data-filter=".science">Science</a>
+                    </li>
+                    <li>
+                      <a href="#" data-filter=".engineering">Engineering</a>
+                    </li>
+                    <li>
+                      <a href="#" data-filter=".law">Law</a>
+                    </li>
+                    <li>
+                      <a href="#" data-filter=".arts">Arts</a>
+                    </li>
+                    <li>
+                      <a href="#" data-filter=".medicine">Medicine</a>
+                    </li>
+                    <li>
+                      <a href="#" data-filter=".business">Business</a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- ======= Portfolio items ===-->
+                <div class="projects-container scrollimation in">
+                  <div class="row">
+                    <article class="col-md-4 col-sm-6 portfolio-item science">
+                      <div class="portfolio-thumb in">
+                        <a href="#" class="main-link">
+                          <img class="img-responsive img-center" src="{% static 'assets/img/posts/science_book1.png' %}" alt="">
+                          <span class="project-title">Science Book 1</span>
+                          <span class="overlay-mask"></span>
+                        </a>
+                        <a class="enlarge cboxElement" href="#" title="Science Book 1"><i class="fa fa-expand fa-fw"></i></a>
+                        <a class="link" href="#"><i class="fa fa-eye fa-fw"></i></a>
+                      </div>
+                    </article>
+                    <article class="col-md-4 col-sm-6 portfolio-item engineering">
+                      <div class="portfolio-thumb in">
+                        <a href="#" class="main-link">
+                          <img class="img-responsive img-center" src="{% static 'assets/img/posts/engineering_book1.png' %}" alt="">
+                          <span class="project-title">Engineering Book 1</span>
+                          <span class="overlay-mask"></span>
+                        </a>
+                        <a class="link centered" href="#"><i class="fa fa-eye fa-fw"></i></a>
+                      </div>
+                    </article>
+                    <article class="col-md-4 col-sm-6 portfolio-item law">
+                      <div class="portfolio-thumb in">
+                        <a href="#" class="main-link">
+                          <img class="img-responsive img-center" src="{% static 'assets/img/posts/law_book1.png' %}" alt="">
+                          <span class="project-title">Law Book 1</span>
+                          <span class="overlay-mask"></span>
+                        </a>
+                        <a class="enlarge centered cboxElement" href="#" title="Law Book 1"><i class="fa fa-expand fa-fw"></i></a>
+                      </div>
+                    </article>
+                    <article class="col-md-4 col-sm-6 portfolio-item arts">
+                      <div class="portfolio-thumb in">
+                        <a href="#" class="main-link">
+                          <img class="img-responsive img-center" src="{% static 'assets/img/posts/arts_book1.png' %}" alt="">
+                          <span class="project-title">Arts Book 1</span>
+                          <span class="overlay-mask"></span>
+                        </a>
+                        <a class="enlarge cboxElement" href="#" title="Arts Book 1"><i class="fa fa-expand fa-fw"></i></a>
+                        <a class="link" href="#"><i class="fa fa-eye fa-fw"></i></a>
+                      </div>
+                    </article>
+                    <article class="col-md-4 col-sm-6 portfolio-item medicine">
+                      <div class="portfolio-thumb in">
+                        <a href="#" class="main-link">
+                          <img class="img-responsive img-center" src="{% static 'assets/img/posts/medicine_book1.png' %}" alt="">
+                          <span class="project-title">Medicine Book 1</span>
+                          <span class="overlay-mask"></span>
+                        </a>
+                        <a class="enlarge cboxElement" href="#" title="Medicine Book 1"><i class="fa fa-expand fa-fw"></i></a>
+                        <a class="link" href="#"><i class="fa fa-eye fa-fw"></i></a>
+                      </div>
+                    </article>
+                    <article class="col-md-4 col-sm-6 portfolio-item business">
+                      <div class="portfolio-thumb in">
+                        <a href="#" class="main-link">
+                          <img class="img-responsive img-center" src="{% static 'assets/img/posts/business_book1.png' %}" alt="">
+                          <span class="project-title">Business Book 1</span>
+                          <span class="overlay-mask"></span>
+                        </a>
+                        <a class="enlarge cboxElement" href="#" title="Business Book 1"><i class="fa fa-expand fa-fw"></i></a>
+                        <a class="link" href="#"><i class="fa fa-eye fa-fw"></i></a>
+                      </div>
+                    </article>
+                    <!-- Add more articles for other books and faculties as needed -->
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

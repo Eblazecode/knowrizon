@@ -2,7 +2,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
-
+from django.db import models
+from django.contrib.auth.hashers import make_password
 
 class AdminManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -42,16 +43,24 @@ class Admin(AbstractBaseUser):
 # Create your models here.
 
 # student models
+
+
 class students(models.Model):
     student_id = models.AutoField(primary_key=True)
     student_matric_no = models.CharField(max_length=50)
     student_name = models.CharField(max_length=50)
-    student_email = models.EmailField(max_length=50, default='Not specified')  # Add default value
-    student_password = models.CharField(max_length=50)
-    student_gender = models.CharField(max_length=50)  # Corrected field name
+    student_email = models.EmailField(max_length=50, default='Not specified')
+    student_password = models.CharField(max_length=200)
+    student_gender = models.CharField(max_length=50)
     student_dept = models.CharField(max_length=50)
     student_created_at = models.DateTimeField(auto_now_add=True)
     student_updated_at = models.DateTimeField(auto_now=True)
+    last_login = models.DateTimeField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:  # Only hash the password if the student is being created
+            self.student_password = make_password(self.student_password)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.student_fname

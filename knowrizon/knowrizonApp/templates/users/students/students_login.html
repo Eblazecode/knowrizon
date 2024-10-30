@@ -36,7 +36,7 @@
 
             </div>
         <div class="row mt-lg-5">
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-8">
 
             <div class="card card-primary">
                  {% if messages %}
@@ -60,12 +60,9 @@
 {% endif %}
               <div class="card-header">
                 <h4> student Login</h4>
-
-
                 </div>
-
               <div class="card-body">
-               <form method="POST" action="{% url 'student_login' %}" class="needs-validation" novalidate="">
+            <form method="POST" action="{% url 'student_login' %}" class="needs-validation" novalidate="">
     {% csrf_token %}
     <div class="form-group">
         <label for="email">Matric number or Email</label>
@@ -74,6 +71,28 @@
             Please fill in your email
         </div>
     </div>
+                   <div class="form-group">
+        <div class="d-block">
+            <label for="password" class="control-label">Password</label>
+            <div class="float-right">
+                <a href="" class="text-small">
+                    Forgot Password?
+                </a>
+            </div>
+        </div>
+
+        <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
+        <div class="invalid-feedback">
+            please fill in your password
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
+            <label class="custom-control-label" for="remember-me">Remember Me</label>
+        </div>
+    </div>
+
 
 
     <div class="form-group">
@@ -104,7 +123,7 @@
             Don't have an account? <a href="{% url 'admin_register' %}">Create One</a>
             </div>
           </div>
-        <div class="col-8 ">
+        <div class="col-8 col-sm-8 col-xs-6">
 
                 <div class="card">
 
@@ -146,21 +165,44 @@
       </a>
     </div>
   </div>
-
               </div>
-
-
         </div>
-
-
         </div>
-
-
       </div>
     </section>
   </div>
 
 <!-- General JS Scripts -->
+
+  <script>
+  // Ensure the CSRF token is included in AJAX requests
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
+
+fetch('/student_login/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+    },
+    body: JSON.stringify({key: 'value'})
+});
+
+  </script>
 <script src="{% static 'assets/js/app.min.js' %}"></script>
 <!-- JS Libraries -->
 <!-- Page Specific JS File -->

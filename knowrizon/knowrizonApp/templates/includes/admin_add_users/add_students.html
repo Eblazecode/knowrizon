@@ -44,13 +44,9 @@
                 <form method="POST" id="student_form_new" action="/add_students/">
                     {% csrf_token %}
                   <div class="row">
-                    <div class="form-group col-6">
-                      <label for="student_fname">First Name</label>
-                      <input id="student_fname" type="text" class="form-control" name="student_fname" autofocus>
-                    </div>
-                    <div class="form-group col-6">
-                      <label for="student_lname">Last Name</label>
-                      <input id="student_lname" type="text" class="form-control" name="student_lname">
+                    <div class="form-group col-8">
+                      <label for="student_fname">Name</label>
+                      <input id="student_fname" type="text" class="form-control" name="student_name" autofocus>
                     </div>
                   </div>
                     <div class="row">

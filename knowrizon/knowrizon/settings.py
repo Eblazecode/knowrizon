@@ -70,7 +70,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'knowrizon.wsgi.application'
 
+# settings.py
 
+# Configure session to persist for 2 weeks
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Keep session active after browser close
+SESSION_SAVE_EVERY_REQUEST = True  # Update session expiry time on each request
+SESSION_COOKIE_SECURE = False  # Set to True for HTTPS
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7  # Example: 1 week in seconds
+SESSION_COOKIE_NAME = 'sessionid'  # Default: 'sessionid
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 

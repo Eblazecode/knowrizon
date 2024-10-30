@@ -25,6 +25,7 @@ urlpatterns = [
     path('login_decide/', views.login_decider,name='login_decider'),
 
     path('admin_logout/', views.admin_logout, name='admin_logout'),
+    path('student_logout/', views.student_logout, name='student_logout'),
 
     # MANAGING USERS
     path('manage_students_users/', views.manage_students, name='manage_students_users'),
@@ -39,6 +40,12 @@ urlpatterns = [
     path('researcher_login/', views.researcher_login, name='researcher_login'),
     path('content_manager_login/', views.content_manager_login, name='content_manager_login'),
 
+    #USERS PASSWORD UPDATE
+    path('student_password_update/', views.students_password_update, name='student_password_update'),
+
     # USERS DASHBOARD
     path('student_dashboard/', views.student_dashboard, name='student_dashboard'),
+
+    # BOOK CATEGORIES
+    path('book_category/', views.book_category, name='book_category'),
 ]

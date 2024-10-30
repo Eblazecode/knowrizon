@@ -162,8 +162,7 @@ def researcher_login(request):
 
 def add_student(request):
     if request.method == 'POST':
-        fname = request.POST.get('student_fname', '').strip()
-        lname = request.POST.get('student_lname', '').strip()
+        studen_name = request.POST.get('student_name', '').strip()
         email = request.POST.get('student_email', '').strip()
         department = request.POST.get('student_department', '').strip()
         matric_no = request.POST.get('student_mat_no', '').strip()
@@ -171,25 +170,26 @@ def add_student(request):
         generic_password = 'password'  # Default password for all students
 
         # Check if all required fields are provided
-        if not all([fname, lname, email, department, matric_no, gender]):
+        if not all([studen_name, email, department, matric_no, gender]):
             messages.error(request, 'All fields are required')
             logger.error('All fields are required')
             return render(request, 'includes/admin_add_users/add_users.html')
 
-        # Check if email is already in use
-        if User.objects.filter(username=email).exists():
+        # Check if email AND MATRIC NUMBER already exists IN STUDENTS DATABASE
+        if students.objects.filter(student_email=email).exists() or students.objects.filter(
+                student_matric_no=matric_no).exists():
             messages.error(request, 'Email already exists')
-            logger.error('Email already exists')
+            logger.error('student is registered; Email or Matric_no already exists')
             return render(request, 'includes/admin_add_users/add_users.html')
 
         try:
             # Create a new user
             user = User.objects.create_user(username=email, password=generic_password)
 
-            # Ensure fields are correctly mapped to your model attributes
+            # Ensure fields are correctly mapped to your model attributes and password is hashed
+
             student = students.objects.create(
-                student_fname=fname,
-                student_lname=lname,
+                student_name=studen_name,
                 student_email=email,
                 student_password=generic_password,  # Encrypt if storing
                 student_gender=gender,
@@ -286,7 +286,7 @@ def add_academic_staff(request):
                 academic_staff_lname=lname,
                 academic_staff_email=email,
                 academic_staff_password=password_generic,
-                academmic_staff_idenity=staffid,
+                academic_staff_identity=staffid,
                 academic_staff_interest=interest,
                 academic_staff_dept=department,
                 academic_staff_position=position,
@@ -296,7 +296,7 @@ def add_academic_staff(request):
             )
             messages.success(request, 'Academic staff registered successfully')
             logger.info('Academic staff registered successfully')
-            return redirect(request, 'includes/admin_add_users/add_users.html')
+            return render(request, 'includes/admin_add_users/add_users.html')
 
     return render(request, 'includes/admin_add_users/add_users.html')
 
@@ -505,50 +505,159 @@ def oversee_user_permissions(request):
 from django.contrib.auth import login as auth_login  # Use Django's built-in login function
 from django.contrib.auth.hashers import check_password
 
+from django.contrib.auth import login as auth_login
+from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+
+from django.contrib.auth import login as auth_login
+from django.contrib import messages
+from django.shortcuts import render
+
 
 def student_login(request):
     if request.method == 'POST':
         matric_no = request.POST.get('mat_no')
         password = request.POST.get('password')
 
-        student = students.objects.filter(student_matric_no=matric_no).first()  # Fetch the student using matric_no
+        # Check if matric number or password is empty
+        if not matric_no or not password:
+            messages.error(request, 'Matric number and password are required.')
+            logger.warning('Login attempt with missing credentials.')
+            return render(request, 'users/students/students_login.html')
 
-        if student:
-            # Check if the password is correct using check_password
-            if check_password(password, student.student_password):
+        # Fetch the student using matric_no
+        student = students.objects.filter(student_matric_no=matric_no).first()
 
-                # Check if it's a generic password and prompt to update
-                if student.student_password == 'password':  # Assuming "password" is the generic placeholder
-                    messages.warning(request, 'Please update your password')
-                    logger.info('Prompting student to update password for matric_no: %s', matric_no)
-                    return render(request, 'users/students/student_update_password.html')
-
-                else:
-                    # If password matches and is valid, log the user in
-                    auth_login(request, student)
-                    messages.success(request, 'Login successful')
-                    logger.info('Login successful for matric_no: %s', matric_no)
-                    return render(request, 'users/students/students_dashboard.html')
-
-            else:
-                # If password is incorrect
-                messages.error(request, 'Invalid username or password.')
-                logger.error('Invalid password for matric_no: %s', matric_no)
-        else:
+        if not student:
             # If no student is found
-            messages.error(request, 'Invalid username or password. Please register with the admin.')
+            messages.error(request, 'Account not found. Please register with the admin.')
             logger.error('No student found for matric_no: %s', matric_no)
+            return render(request, 'users/students/students_login.html')
+
+        # Check if the password is the default "password"
+        if password == "password":
+            # Extract student's name from the student instance, not from the User model
+            student_name = student.student_name  # or student.student_name if the field exists
+            messages.warning(request, f' please update your password.')
+            logger.info('Prompting student to update password for matric_no: %s', matric_no)
+            return render(request, 'users/students/student_update_password.html', {'student': student})
+
+        # Compare the passwords using Django's built-in check_password function since the password is hashed in the users table
+
+        if check_password(password, student.student_password):
+            # Log the student in
+            auth_login(request, student)
+            # fetch student name and matric_no from the student instance and store in session
+            student_name = student.student_name
+            student_matric_no = student.student_matric_no
+            request.session['student_name'] = student_name
+            request.session['student_matric_no'] = student_matric_no
+
+            messages.success(request, 'Login successful.')
+            logger.info('Login successful for matric_no: %s', matric_no)
+            return render(request, 'users/students/students_dashboard.html' , {'student_name': student_name, 'student_matric_no': student_matric_no})
+        # If password is incorrect
+        messages.error(request, 'Invalid username or password.')
+        logger.error('Invalid password for matric_no: %s', matric_no)
 
     return render(request, 'users/students/students_login.html')
 
 
-def User_password_update(request, matric_no):
+
+
+from django.contrib.auth.hashers import make_password
+from django.contrib import messages
+from django.shortcuts import render
+from .models import students  # Ensure you have imported the students model
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+def students_password_update(request):
     if request.method == 'POST':
-        # Handle password updates logic
-        pass
-    return render(request, 'update_password.html')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirmpassword')
+        matric_no = request.POST.get('mat_no')
+
+        # Validate that the passwords match
+        if password != confirm_password:
+            messages.error(request, 'Passwords do not match.')
+            logger.error('Passwords do not match for matric_no: %s', matric_no)
+            return render(request, 'users/students/student_update_password.html')
+
+        # Validate password length
+        elif len(password) < 8:
+            messages.error(request, 'Password must be at least 8 characters.')
+            logger.error('Password must be at least 8 characters for matric_no: %s', matric_no)
+            return render(request, 'users/students/student_update_password.html')
+
+        # Check for at least one digit
+        elif not any(char.isdigit() for char in password):
+            messages.error(request, 'Password must contain at least one digit.')
+            logger.error('Password missing digit for matric_no: %s', matric_no)
+            return render(request, 'users/students/student_update_password.html')
+
+        # Check for at least one uppercase letter
+        elif not any(char.isupper() for char in password):
+            messages.error(request, 'Password must contain at least one uppercase letter.')
+            logger.error('Password missing uppercase letter for matric_no: %s', matric_no)
+            return render(request, 'users/students/student_update_password.html')
+
+        # Check for at least one lowercase letter
+        elif not any(char.islower() for char in password):
+            messages.error(request, 'Password must contain at least one lowercase letter.')
+            logger.error('Password missing lowercase letter for matric_no: %s', matric_no)
+            return render(request, 'users/students/student_update_password.html')
+
+        # Check for at least one special character
+        elif not any(char in ['$', '@', '#', '%', '!', '&', '*'] for char in password):
+            messages.error(request, 'Password must contain at least one special character.')
+            logger.error('Password missing special character for matric_no: %s', matric_no)
+            return render(request, 'users/students/student_update_password.html')
+
+        # Ensure password is not set as the default "password"
+        elif password == "password":
+            messages.error(request, 'Password cannot be the default password.')
+            logger.error('Password is set to default "password" for matric_no: %s', matric_no)
+            return render(request, 'users/students/student_update_password.html')
+
+        # Password cannot be the same as the matric number or common variants
+        elif password == matric_no or password == matric_no[::-1] or password == matric_no[1:]:
+            messages.error(request, 'Password cannot be similar to your matric number.')
+            logger.error('Password is too similar to matric_no: %s', matric_no)
+            return render(request, 'users/students/student_update_password.html')
+
+        else:
+            # Fetch the student record using the matric number
+            student = students.objects.filter(student_matric_no=matric_no).first()
+
+            if student:
+                # Hash the password before saving it
+                student.student_password = make_password(password)
+                student.save()
+                messages.success(request, 'Password updated successfully.')
+                logger.info('Password updated successfully for matric_no: %s', matric_no)
+                return render(request, 'users/students/students_dashboard.html')
+            else:
+                messages.error(request, 'Student not found.')
+                logger.error('No student found for matric_no: %s', matric_no)
+
+    return render(request, 'users/students/student_update_password.html')
 
 
 # USERS DASHBOARD
 def student_dashboard(request):
     return render(request, 'users/students/students_dashboard.html')
+
+
+# STUDENT LOGOUT
+def student_logout(request):
+    logout(request)
+    return render(request, 'login_decision.html')
+
+
+# BOOK CATEGORY ; STUDENT SECTION
+def book_category(request):
+    return render(request, 'books/book_category.html')
+
