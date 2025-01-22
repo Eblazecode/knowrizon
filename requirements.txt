@@ -119,7 +119,6 @@ rfc3339-validator==0.1.4
 rfc3986-validator==0.1.1
 rpds-py==0.20.0
 rsa==4.9
-psycopg2-binary
 Send2Trash==1.8.0
 service-identity==24.2.0
 setuptools==75.3.0
