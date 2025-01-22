@@ -3,7 +3,10 @@
   "builds": [
     {
       "src": "knowrizon/asgi.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "installCommand": "apt-get update && apt-get install -y postgresql-client && pip install -r requirements.txt"
+      }
     }
   ],
   "routes": [
